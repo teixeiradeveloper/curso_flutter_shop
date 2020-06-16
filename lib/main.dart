@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/providers/cart.dart';
 import './views/products_over_view_screem.dart';
 import './utils/app_routes.dart';
 import './views/product_detail_screem.dart';
@@ -26,8 +27,15 @@ class MyApp extends StatelessWidget {
     //   ),
     // );
 
-    return ChangeNotifierProvider(
-      create: (ctx) => new Products(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => new Products(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => new Cart(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Minha Loja',
         theme: ThemeData(
