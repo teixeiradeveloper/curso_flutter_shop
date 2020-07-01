@@ -13,7 +13,6 @@ class Badge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // com stack consegue fazer pilha de widges
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
@@ -39,7 +38,7 @@ class Badge extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        )
       ],
     );
   }

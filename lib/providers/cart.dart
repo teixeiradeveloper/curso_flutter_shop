@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:shop/providers/product.dart';
+import './product.dart';
 
 class CartItem {
   final String id;
@@ -12,10 +12,10 @@ class CartItem {
 
   CartItem({
     @required this.id,
-    @required this.price,
-    @required this.quantity,
-    @required this.title,
     @required this.productId,
+    @required this.title,
+    @required this.quantity,
+    @required this.price,
   });
 }
 
@@ -43,41 +43,59 @@ class Cart with ChangeNotifier {
       _items.update(
         product.id,
         (existingItem) => CartItem(
-          productId: product.id,
           id: existingItem.id,
-          price: existingItem.price,
-          quantity: existingItem.quantity + 1,
+          productId: product.id,
           title: existingItem.title,
+          quantity: existingItem.quantity + 1,
+          price: existingItem.price,
         ),
       );
     } else {
       _items.putIfAbsent(
-          product.id,
-          () => CartItem(
-                productId: product.id,
-                id: Random().nextDouble().toString(),
-                price: product.price,
-                quantity: 1,
-                title: product.title,
-              ));
+        product.id,
+        () => CartItem(
+          id: Random().nextDouble().toString(),
+          productId: product.id,
+          title: product.title,
+          price: product.price,
+          quantity: 1,
+        ),
+      );
     }
 
     notifyListeners();
+  }
 
-    // if (_items.containsKey(product.id)) {
-    //   _items.update(product.id, (existingItem) {
-    //     return CartItem(
-    //       id: existingItem.id,
-    //       price: existingItem.price,
-    //       quantity: existingItem.quantity + 1,
-    //       title: existingItem.title,
-    //     );
-    //   });
-    // }
+  void removeSingleItem(productId) {
+    if(!_items.containsKey(productId)) {
+      return;
+    }
+
+    if(_items[productId].quantity == 1) {
+      _items.remove(productId);
+    } else {
+      _items.update(
+        productId,
+        (existingItem) => CartItem(
+          id: existingItem.id,
+          productId: existingItem.productId,
+          title: existingItem.title,
+          quantity: existingItem.quantity - 1,
+          price: existingItem.price,
+        ),
+      );
+    }
+
+    notifyListeners();
   }
 
   void removeItem(String productId) {
     _items.remove(productId);
+    notifyListeners();
+  }
+
+  void clear() {
+    _items = {};
     notifyListeners();
   }
 }

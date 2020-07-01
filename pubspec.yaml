@@ -20,6 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^4.0.5
+  intl: ^0.16.1
   # ˜ evolui somente o pacth
   # ˆ evolui funcionalidades
 

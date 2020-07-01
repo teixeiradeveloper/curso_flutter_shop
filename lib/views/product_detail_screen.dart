@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 import '../providers/product.dart';
-// import '../providers/counter_provider.dart';
 
-class ProductDetailScreem extends StatefulWidget {
-  ProductDetailScreem();
-
-  @override
-  _ProductDetailScreemState createState() => _ProductDetailScreemState();
-}
-
-class _ProductDetailScreemState extends State<ProductDetailScreem> {
+class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Product product =
@@ -38,9 +30,7 @@ class _ProductDetailScreemState extends State<ProductDetailScreem> {
                 fontSize: 20,
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
               width: double.infinity,
@@ -48,28 +38,10 @@ class _ProductDetailScreemState extends State<ProductDetailScreem> {
                 product.description,
                 textAlign: TextAlign.center,
               ),
-            )
+            ),
           ],
         ),
       ),
-      // body: Column( // aqui um exemplo do uso do provider
-      //   children: <Widget>[
-      //     Text(CounterProvider.of(context).state.value.toString()),
-      //     RaisedButton(
-      //       child: Text('+'),
-      //       onPressed: () {
-      //         setState(() {
-      //           // context
-      //           //     .dependOnInheritedWidgetOfExactType<CounterProvider>()
-      //           //     .state
-      //           //     .inc();
-      //           CounterProvider.of(context).state.inc();
-      //         });
-      //         print(CounterProvider.of(context).state.value);
-      //       },
-      //     ),
-      //   ],
-      // ),
     );
   }
 }
